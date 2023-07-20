@@ -53,3 +53,30 @@ npx prisma generate
 mkdir lib
 touch lib/prisma.ts
 ```
+
+## Next Auth
+
+```bash
+npm install next-auth@4 @next-auth/prisma-adapter
+
+# After adding the new schema run:
+npx prisma db push
+```
+
+## GitHub authentication
+
+Create a OAuth App in GitHub
+
+Set the callback URL to <http://localhost:3000/api/auth> for now, when in production another setting will be needed
+
+### Add the following environment variables to Vercel Environment Variables
+
+GITHUB_ID=<>
+GITHUB_SECRET=<>
+NEXTAUTH_URL=<http://localhost:3000/api/auth>
+
+Run the following command to download the environment variables from Vercel:
+
+```bash
+vercel env pull .env
+```
