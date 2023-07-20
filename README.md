@@ -14,21 +14,42 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Download env from vercel
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```bash
+vercel env pull .env
+```
 
-## Learn More
+## Prisma
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm install prisma --save-dev
+npx prisma init
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Once the schema is created in prisma/schema.prisma, run the following command to create the database tables:
+npx prisma db push
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+# create a postinstall script  with the content:
+echo '{
+  "scripts" {
+    "postinstall": "prisma generate"
+  }
+}' > postinstall
 
-## Deploy on Vercel
+# change the package.json file to include the postinstall script:
+# "build": "prisma generate && next build"
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# To open the Prisma Studio, run the following command:
+npx prisma studio
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+# To install the Prisma Client, run the following command:
+npm install @prisma/client
+
+# Locally every time you change the schema, you need to run the following command:
+# To generate the Prisma Client, run the following command:
+npx prisma generate
+
+# You'll use a single PrismaClient instance that you can import into any file where it's needed. The instance will be created in a prisma.ts file inside the lib/ directory
+mkdir lib
+touch lib/prisma.ts
+```
