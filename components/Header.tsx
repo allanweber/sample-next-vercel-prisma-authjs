@@ -14,7 +14,7 @@ const Header: React.FC = () => {
     <div className="left">
       <Link legacyBehavior href="/">
         <a className="bold" data-active={isActive('/')}>
-          Feed
+          Feed - TestBranch
         </a>
       </Link>
       <style jsx>{`
